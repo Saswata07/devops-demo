@@ -41,7 +41,7 @@ if ($vote == 0) {
   $no = $no + 1;
 } 
 //insert votes to db
-$sql = "INSERT INTO funds (id, YES, NO)
+$sql = "INSERT INTO POLL_RESULTS (id, YES, NO)
     VALUES ($id, $yes, $no)
         ON DUPLICATE KEY UPDATE YES = $yes, NO = $no;";
 $conn->query($sql);

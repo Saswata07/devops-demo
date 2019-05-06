@@ -4,9 +4,9 @@ $id = 1;
 //get content of textfile
 //$filename = "poll_result.txt";
 //$content = file($filename);
-$DB_SERVER = "localhost";
-$DB_USERNAME = "username";
-$DB_PASSWORD = "password";
+$DB_SERVER = "127.0.0.1";
+$DB_USERNAME = "saswata";
+$DB_PASSWORD = "saswata";
 
 // Create connection
 $conn = new mysqli($DB_SERVER, $DB_USERNAME, $DB_PASSWORD);

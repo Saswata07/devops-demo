@@ -1,27 +1,54 @@
 <?php
 $vote = $_REQUEST['vote'];
-
+$id = 1;
 //get content of textfile
-$filename = "poll_result.txt";
-$content = file($filename);
+//$filename = "poll_result.txt";
+//$content = file($filename);
+$DB_SERVER = "localhost";
+$DB_USERNAME = "username";
+$DB_PASSWORD = "password";
 
+// Create connection
+$conn = new mysqli($DB_SERVER, $DB_USERNAME, $DB_PASSWORD);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+//Create database
+$conn->query('CREATE DATABASE IF NOT EXISTS POLL;');
+mysqli_select_db($conn, 'POLL');
+//Create table
+$sql = "CREATE TABLE IF NOT EXISTS POLL_RESULTS(id INT(6) AUTO_INCREMENT PRIMARY KEY, 
+YES INT(6) NOT NULL,
+NO INT(6) NOT NULL);";
+$conn->query($sql);
 //put content in array
-$array = explode("||", $content[0]);
-$yes = $array[0];
-$no = $array[1];
-
-if ($vote == 0) {
-  $yes = $yes + 1;
+$sql = 'SELECT * FROM POLL_RESULTS WHERE ID =' . $id .';';
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+  $row = $result->fetch_assoc()
+$yes = $row[YES];
+$no = $row[NO];
+}
+else{
+  $yes = 0;
+  $no = 0;
 }
 if ($vote == 1) {
-  $no = $no + 1;
+  $yes = $yes + 1;
 }
-
-//insert votes to txt file
-$insertvote = $yes."||".$no;
-$fp = fopen($filename,"w");
-fputs($fp,$insertvote);
-fclose($fp);
+if ($vote == 0) {
+  $no = $no + 1;
+} 
+//insert votes to db
+$sql = "INSERT INTO funds (id, YES, NO)
+    VALUES ($id, $yes, $no)
+        ON DUPLICATE KEY UPDATE YES = $yes, NO = $no;";
+$conn->query($sql);
+//$insertvote = $yes."||".$no;
+//$fp = fopen($filename,"w");
+//fputs($fp,$insertvote);
+//fclose($fp);
 ?>
 
 <h2>Result:</h2>

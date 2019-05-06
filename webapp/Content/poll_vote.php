@@ -27,8 +27,8 @@ $sql = 'SELECT * FROM POLL_RESULTS WHERE ID =' . $id .';';
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
   $row = $result->fetch_assoc();
-$yes = $row[YES];
-$no = $row[NO];
+$yes = $row['YES'];
+$no = $row['NO'];
 }
 else{
   $yes = 0;

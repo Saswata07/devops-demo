@@ -5,8 +5,8 @@ $id = 1;
 //$filename = "poll_result.txt";
 //$content = file($filename);
 $DB_SERVER = "18.236.143.8:3306";
-$DB_USERNAME = "saswata";
-$DB_PASSWORD = "saswata";
+$DB_USERNAME = $_ENV['SQL_USER'];
+$DB_PASSWORD = $_ENV['SQL_PASS'];
 
 // Create connection
 $conn = new mysqli($DB_SERVER, $DB_USERNAME, $DB_PASSWORD);

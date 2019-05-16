@@ -4,7 +4,7 @@ $id = 1;
 //get content of textfile
 //$filename = "poll_result.txt";
 //$content = file($filename);
-$DB_SERVER = "18.236.143.8:3306";
+$DB_SERVER = "18.236.143.8:3305";
 $DB_USERNAME = $_ENV['SQL_USER'];
 $DB_PASSWORD = $_ENV['SQL_PASS'];
 
